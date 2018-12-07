@@ -35,6 +35,7 @@ download_steem_price <- function(){
   steem <- adat
   
   
+  
   ###sbd
   my_link <- paste0('https://coinmarketcap.com/currencies/steem-dollars/historical-data/?start=20130428&end=', end_date)
   t<- read_html(my_link)
