@@ -6,7 +6,7 @@ library(rvest)
 
 
 acc_name <- "misrori"
-setwd('/home/mihaly/R_codes/steemblockchain/vizualization/')
+setwd('/home/mihaly/R_codes/steemdetective_app/')
 download_steem_price <- function(){
   end_date<- gsub('-', '',Sys.Date())
   #steem
