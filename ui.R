@@ -4,19 +4,24 @@ library(data.table)
 library(DT)
 library(leaflet)
 library(lubridate)
+library(shinyWidgets)
+
 navbarPage(
   title="Steemblockchain explorer",theme = "journal",fluid = TRUE,
   tabPanel("trransferee",
            sidebarLayout(
              sidebarPanel(
               
-               shiny::textInput('name', 'Name',value = "")
+               shiny::textInput('name', 'Name',value = ""),
+               actionButton("button", "An action button")
                
+
                
                ),
              mainPanel(
+              
                
-               HTML('fejlesztés')
+               DT::dataTableOutput('alltr_df')
                
              )
                )),

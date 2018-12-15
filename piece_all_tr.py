@@ -3,6 +3,7 @@ from flask import request
 import time
 import json
 from steem import Steem
+import re
 # steem install https://steemit.com/computer/@fr3eze/steem-pythoninstallationonlinux-1ryocg7ebu?sort=author_reputation
 
 app = Flask(__name__)
@@ -13,34 +14,11 @@ def get_all_tr():
     data = request.get_json()
     print(data)
     name = data['name']
+    my_to=data['to']
+    my_limit=data['limit']
     
-    osszes=[]
-    szamlalo=10000
-
-    while True:
-        try:
-            print(szamlalo)
-            t = s.steemd.get_account_history(name, index_from=szamlalo, limit=10000)
-            
-        except Exception as e:
-            print(e)
-            time.sleep(5)
-            s = Steem()
-            t = s.steemd.get_account_history(name, index_from=szamlalo, limit=10000)
-            
-            
-        if osszes:
-            utolso = osszes[-1][0]
-        else:
-            utolso=t[-1][0]
-
-        if(t[-1][0]!=szamlalo):
-            kell_meg = t[-1][0]-utolso
-            osszes.extend(t[-kell_meg:])
-            break
-
-        osszes.extend(t[0:-1])
-        szamlalo+=10000
+    osszes = s.steemd.get_account_history(name, index_from=my_to, limit=my_limit)
+    
 
     return app.response_class(
         response=json.dumps(osszes),
